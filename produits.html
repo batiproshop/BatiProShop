@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>BatiProShop — Produits</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html">Accueil</a>
+    <a href="produits.html">Produits</a>
+    <a href="contact.html">Contact</a>
+    <div class="cart">Panier: <span id="cart-count">0</span></div>
+  </nav>
+
+  <main class="container">
+    <h1>Nos produits</h1>
+
+    <input type="text" id="search" placeholder="Rechercher un outil..." class="search-bar">
+
+    <div class="grid">
+      <div class="card" data-name="Perceuse 18V" data-price="59">
+        <h3>Perceuse 18V</h3>
+        <p>Perçage rapide · 2 batteries · Coffret</p>
+        <strong>59 € HT</strong>
+        <button class="buy">Acheter</button>
+      </div>
+
+      <div class="card" data-name="Marteau pro" data-price="12">
+        <span class="promo">-15%</span>
+        <h3>Marteau pro</h3>
+        <p>Tête acier · Poignée anti-vibration</p>
+        <strong>12 € HT</strong>
+        <button class="buy">Acheter</button>
+      </div>
+
+      <div class="card" data-name="Mètre ruban 5 m" data-price="8">
+        <h3>Mètre ruban 5 m</h3>
+        <p>Blocage précis · Boîtier résistant</p>
+        <strong>8 € HT</strong>
+        <button class="buy">Acheter</button>
+      </div>
+    </div>
+  </main>
+
+  <button id="toTop">↑ Haut</button>
+  <footer class="footer">© 2025 BatiProShop</footer>
+
+  <script>
+    // лічильник кошика
+    const countEl = document.getElementById('cart-count');
+    const getCount = () => Number(localStorage.getItem('cartCount') || 0);
+    const setCount = n => { localStorage.setItem('cartCount', n); countEl.textContent = n; };
+    setCount(getCount());
+
+    // кнопки «Купити» — +1 у кошик
+    document.querySelectorAll('.buy').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setCount(getCount() + 1);
+        alert('Ajouté au panier (démo)');
+      });
+    });
+
+    // пошук по назві
+    document.getElementById('search').addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase();
+      document.querySelectorAll('.card').forEach(card => {
+        const name = card.querySelector('h3').textContent.toLowerCase();
+        card.style.display = name.includes(term) ? 'block' : 'none';
+      });
+    });
+
+    // «наверх»
+    const btnTop = document.getElementById('toTop');
+    window.addEventListener('scroll', () => { btnTop.style.display = window.scrollY > 200 ? 'block' : 'none'; });
+    btnTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+  </script>
+</body>
+</html>

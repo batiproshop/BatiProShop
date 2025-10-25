@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>BatiProShop — Contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html">Accueil</a>
+    <a href="produits.html">Produits</a>
+    <a href="contact.html">Contact</a>
+    <div class="cart">Panier: <span id="cart-count">0</span></div>
+  </nav>
+
+  <main class="container">
+    <h1>Contactez-nous</h1>
+    <p>Vous avez une question, un devis ou une commande ? Envoyez-nous un message.</p>
+
+    <form class="contact-form">
+      <label>Nom :</label>
+      <input type="text" placeholder="Votre nom" required>
+
+      <label>Email :</label>
+      <input type="email" placeholder="Votre email" required>
+
+      <label>Message :</label>
+      <textarea rows="5" placeholder="Votre message..." required></textarea>
+
+      <button type="submit">Envoyer</button>
+    </form>
+  </main>
+
+  <button id="toTop">↑ Haut</button>
+  <footer class="footer">© 2025 BatiProShop</footer>
+
+  <script>
+    // показуємо лічильник кошика
+    const countEl = document.getElementById('cart-count');
+    const getCount = () => Number(localStorage.getItem('cartCount') || 0);
+    countEl.textContent = getCount();
+
+    // відправка форми (демо)
+    document.querySelector('.contact-form').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Merci pour votre message ! Nous vous contacterons bientôt.');
+    });
+
+    // «наверх»
+    const btn = document.getElementById('toTop');
+    window.addEventListener('scroll', () => { btn.style.display = window.scrollY > 200 ? 'block' : 'none'; });
+    btn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+  </script>
+</body>
+</html>
